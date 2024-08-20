@@ -29,11 +29,11 @@ const AudioProcessor = () => {
       // microphoneRef.current.connect(filterNode); // 마이크 입력을 필터에 연결
       // filterNode.connect(audioContext.destination); // 필터를 오디오 출력에 연결
 
-      const waveShaper = audioContext.createWaveShaper();
-      waveShaperRef.current = waveShaper;
+      const waveShaper = audioContext.createWaveShaper(); // waveShaperNode 생성
+      waveShaperRef.current = waveShaper; // useRef에 저장
 
       // 커브 설정
-      const curve = new Float32Array(1024);
+      const curve = new Float32Array(1024); // 1024개의 샘플을 포함하여 왜곡 커브를 정의
       for (let i = 0; i < curve.length; i++) {
         const x = (i * 2.0) / curve.length - 1.0; // -1.0에서 1.0까지
         curve[i] = Math.sign(x) * Math.pow(x, distortionAmount); // 비선형 왜곡 함수
