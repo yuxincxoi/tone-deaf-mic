@@ -20,6 +20,9 @@ const AudioProcessor = () => {
     filterNode.type = "lowpass"; // 필터 유형 설정 - 저역 필터
     filterNode.frequency.setValueAtTime(frequency, audioContext.currentTime); // 초기 필터 주파수 설정
     filterNodeRef.current = filterNode; // useRef에 저장
+
+    microphoneRef.current.connect(filterNode); // 마이크 입력을 필터에 연결
+    filterNode.connect(audioContext.destination); // 필터를 오디오 출력에 연결
   };
 
   initAudio();
