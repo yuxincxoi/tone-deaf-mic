@@ -32,18 +32,18 @@ const AudioProcessor = () => {
 
   return (
     <>
-      <button onClick={() => console.log("processing true")}>Start</button>
-      <button onClick={() => console.log("processing false")}>Stop</button>
+      <button onClick={() => setIsProcessing(true)}>Start</button>
+      <button onClick={() => setIsProcessing(false)}>Stop</button>
       <input
         type="range"
         min="100"
         max="5000"
-        value="frequency"
+        value={frequency}
         placeholder="input"
-        onChange={() => console.log("hi")}
+        onChange={(e) => setFrequency(Number(e.target.value))}
       />
       <label>
-        Frequency: <span></span> Hz
+        Frequency: <span>{frequency}</span> Hz
       </label>
     </>
   );
