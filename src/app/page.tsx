@@ -1,7 +1,10 @@
+import AudioProcessor from "./AudioProcessor";
+
 export default function Home() {
   return (
-    <>
-      <h1>hi</h1>
-    </>
+    <div>
+      <h1>Audio Recorder</h1>
+      <AudioProcessor />
+    </div>
   );
 }
