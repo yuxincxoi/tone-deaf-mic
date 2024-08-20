@@ -6,7 +6,7 @@ const AudioProcessor = () => {
   const audioContextRef = useRef<AudioContext | null>(null);
   const microphoneRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const filterNodeRef = useRef<BiquadFilterNode | null>(null);
-  const [frequency, setFrequecy] = useState(1000);
+  const [frequency, setFrequency] = useState(1000);
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
