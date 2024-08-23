@@ -70,6 +70,15 @@ const AudioProcessor = () => {
       buffer.length,
       buffer.sampleRate
     );
+
+    const source = offlineContext.createBufferSource(); // 오디오 렌더링 노드 생성
+    source.buffer = buffer;
+
+    // 오디오 노드(렌더링) -> 출력 노드 연결
+    source.connect(offlineContext.destination);
+
+    // 재생 시작
+    source.start();
   };
   return (
     <>
