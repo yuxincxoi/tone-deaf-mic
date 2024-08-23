@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 
 const AudioProcessor = () => {
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
