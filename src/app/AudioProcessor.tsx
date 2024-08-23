@@ -62,6 +62,15 @@ const AudioProcessor = () => {
 
     return buffer;
   };
+
+  const audioBufferToBlob = async (buffer: AudioBuffer) => {
+    // 오디오 렌더링을 위한 offlineAudioContext 생성
+    const offlineContext = new OfflineAudioContext(
+      buffer.numberOfChannels,
+      buffer.length,
+      buffer.sampleRate
+    );
+  };
   return (
     <>
       <div>
