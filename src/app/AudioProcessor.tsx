@@ -46,6 +46,16 @@ const AudioProcessor = () => {
     }
     distortion.curve = curve; // 왜곡된 곡선을 입력신호에 설정
     distortion.oversample = "4x"; // 왜곡 품질 향상
+
+    const source = audioContext.createBufferSource(); // 오디오 재생 노드 생성
+    source.buffer = buffer;
+
+    // 오디오 노드(재생) -> 왜곡 노드(왜곡) -> 볼륨 노드(볼륨조절) -> 출력 노드
+    source.connect(distortion);
+    distortion.connect(gain);
+    gain.connect(audioContext.destination);
+
+    return buffer;
   };
   return (
     <>
