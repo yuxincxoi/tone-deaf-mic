@@ -22,6 +22,8 @@ const AudioProcessor = () => {
         const sourceNode = audioContext.createMediaElementSource(
           audioElementRef.current
         );
+        // 변환한 오디오 데이터 노드 소스로 저장
+        sourceNodeRef.current = sourceNode;
       }
 
       // const stream = await navigator.mediaDevices.getUserMedia({ audio: true }); // 마이크 스트림 얻기
