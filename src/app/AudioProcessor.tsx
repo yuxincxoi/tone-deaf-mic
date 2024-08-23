@@ -17,6 +17,8 @@ const AudioProcessor = () => {
   }, []);
 
   useEffect(() => {
+    if (!audioContext) return;
+
     const processAudio = async () => {
       try {
         const response = await fetch("/audio/anthem.mp3");
@@ -24,6 +26,9 @@ const AudioProcessor = () => {
         const arrayBuffer = await response.arrayBuffer();
         // ArrayBuffer로 변환된 오디오 데이터를 AudioBuffer로 디코딩
         const audioBuffer = await audioContext?.decodeAudioData(arrayBuffer);
+
+        // 왜곡 효과 적용
+        const distortedBuffer = applyDistortion(audioBuffer);
       } catch (error) {
         console.error(error);
       }
