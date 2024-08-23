@@ -33,17 +33,13 @@ const AudioProcessor = () => {
   }, [audioContext]);
   return (
     <>
-      <audio src="/audio/anthem.mp3" controls></audio>
-      <input
-        type="range"
-        min="100"
-        max="5000"
-        value="frequency"
-        placeholder="input"
-      />
-      <label>
-        Frequency: <span>frequency</span> Hz
-      </label>
+      <div>
+        <h2>Original</h2>
+        <audio ref={audioElementRef} controls>
+          <source src="/audio/anthem.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
+      <div></div>
     </>
   );
 };
