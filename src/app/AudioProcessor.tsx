@@ -79,6 +79,8 @@ const AudioProcessor = () => {
 
     // 재생 시작
     source.start();
+
+    const renderBuffer = await offlineContext.startRendering(); // 렌더링된 오디오 데이터 버퍼로 반환
   };
   return (
     <>
