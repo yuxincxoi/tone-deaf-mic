@@ -29,12 +29,11 @@ const AudioProcessor = () => {
 
     initAudio();
   }, [isProcessing, frequency]);
-
   return (
     <>
-      <button onClick={() => setIsProcessing(true)}>Start</button>
-      <button onClick={() => setIsProcessing(false)}>Stop</button>
-      <input
+      {/* <button onClick={() => setIsProcessing(true)}>Start</button>
+      <button onClick={() => setIsProcessing(false)}>Stop</button> */}
+      {/* <input
         type="range"
         min="100"
         max="5000"
@@ -44,7 +43,7 @@ const AudioProcessor = () => {
       />
       <label>
         Frequency: <span>{frequency}</span> Hz
-      </label>
+      </label> */}
     </>
   );
 };
