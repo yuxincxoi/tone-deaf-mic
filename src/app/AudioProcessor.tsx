@@ -31,7 +31,7 @@ const AudioProcessor = () => {
     };
 
     processAudio();
-  });
+  }, [audioContext]);
   return (
     <>
       <audio src="/audio/anthem.mp3" controls></audio>
