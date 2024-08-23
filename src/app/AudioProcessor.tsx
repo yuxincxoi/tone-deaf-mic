@@ -31,7 +31,11 @@ const AudioProcessor = () => {
   }, [isProcessing, frequency]);
   return (
     <>
-      <audio src="/audio/anthem.mp3" controls></audio>
+      <audio
+        src="/audio/anthem.mp3"
+        controls
+        onPlay={() => console.log("play")}
+      ></audio>
       {/* <button onClick={() => setIsProcessing(true)}>Start</button>
       <button onClick={() => setIsProcessing(false)}>Stop</button> */}
       {/* <input
