@@ -89,6 +89,9 @@ const AudioProcessor = () => {
       const channels = buffer.numberOfChannels; // 오디오 채널 수
       const sampleRate = buffer.sampleRate; // 샘플링 주파수
       const bitsPerSample = 16; // 샘플당 비트 수
+
+      const view = new DataView(new ArrayBuffer(length)); // 메모리 공간을 확보하여 데이터로 접근
+      let offset = 0; // 메모리 위치
     };
   };
   return (
