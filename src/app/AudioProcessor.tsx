@@ -93,6 +93,14 @@ const AudioProcessor = () => {
       const view = new DataView(new ArrayBuffer(length)); // 메모리 공간을 확보하여 데이터로 접근
       let offset = 0; // 메모리 위치
     };
+
+    // 문자열을 DataView에 기록하는 함수
+    const writeString = (str: string, view: DataView, offset: number) => {
+      // 문자열을 8비트로 기록
+      for (let i = 0; i < str.length; i++) {
+        view.setUint8(offset++, str.charCodeAt(i));
+      }
+    };
   };
   return (
     <>
