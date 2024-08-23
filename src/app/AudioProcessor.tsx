@@ -16,6 +16,22 @@ const AudioProcessor = () => {
 
     initAudio();
   }, []);
+
+  useEffect(() => {
+    const processAudio = async () => {
+      try {
+        const response = await fetch("/audio/anthem.mp3");
+        // response를 ArrayBuffer로 변환
+        const arrayBuffer = await response.arrayBuffer();
+        // ArrayBuffer로 변환된 오디오 데이터를 AudioBuffer로 디코딩
+        const audioBuffer = await audioContext?.decodeAudioData(arrayBuffer);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    processAudio();
+  });
   return (
     <>
       <audio src="/audio/anthem.mp3" controls></audio>
