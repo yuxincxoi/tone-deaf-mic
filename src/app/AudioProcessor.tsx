@@ -31,6 +31,13 @@ const AudioProcessor = () => {
 
     processAudio();
   }, [audioContext]);
+
+  const applyDistortion = (buffer: AudioBuffer) => {
+    if (!audioContext) return buffer;
+
+    const distortion = audioContext.createWaveShaper(); // 왜곡효과 적용하는 node 생성
+    const gain = audioContext.createGain(); // 볼륨조절 node 생성
+  };
   return (
     <>
       <div>
