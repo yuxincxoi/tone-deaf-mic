@@ -81,6 +81,15 @@ const AudioProcessor = () => {
     source.start();
 
     const renderBuffer = await offlineContext.startRendering(); // 렌더링된 오디오 데이터 버퍼로 반환
+
+    const encodeWAV = (buffer: AudioBuffer) => {
+      const numOfChan = buffer.numberOfChannels; // 오디오 채널 수
+      const length = buffer.length * numOfChan * 2 + 44; // WAV 파일 길이 (헤더 44바이트 + 오디오 데이터 크기)
+      const rate = buffer.sampleRate; // 샘플링 주파수
+      const channels = buffer.numberOfChannels; // 오디오 채널 수
+      const sampleRate = buffer.sampleRate; // 샘플링 주파수
+      const bitsPerSample = 16; // 샘플당 비트 수
+    };
   };
   return (
     <>
