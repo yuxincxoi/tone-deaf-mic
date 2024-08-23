@@ -16,6 +16,13 @@ const AudioProcessor = () => {
       const audioContext = new AudioContext(); // Web Audio API 기능에 접근하기 위해 인스턴스 생성
       audioContextRef.current = audioContext as AudioContext; // useRef에 저장
 
+      if (audioElementRef.current) {
+        // 오디오 데이터를 오디오 노드로 변환
+        const sourceNode = audioContext.createMediaElementSource(
+          audioElementRef.current
+        );
+      }
+
       // const stream = await navigator.mediaDevices.getUserMedia({ audio: true }); // 마이크 스트림 얻기
       // microphoneRef.current = audioContext.createMediaStreamSource(stream); // 얻은 스트림을 오디오 컨텍스트에 전달
 
