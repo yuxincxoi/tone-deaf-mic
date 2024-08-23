@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const AudioProcessor = () => {
   const audioContextRef = useRef<AudioContext | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const sourceNodeRef = useRef<MediaElementAudioSourceNode | null>(null);
   // const microphoneRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const filterNodeRef = useRef<BiquadFilterNode | null>(null);
   const [frequency, setFrequency] = useState(1000);
