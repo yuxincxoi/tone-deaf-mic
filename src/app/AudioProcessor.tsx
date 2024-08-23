@@ -24,18 +24,22 @@ const AudioProcessor = () => {
         );
         // 변환한 오디오 데이터 노드 소스로 저장
         sourceNodeRef.current = sourceNode;
+
+        const filterNode = audioContext.createBiquadFilter(); // BiquadFilterNode 생성
+        filterNode.type = "lowpass"; // 필터 유형 설정 - 저역 필터
+        filterNode.frequency.setValueAtTime(
+          frequency,
+          audioContext.currentTime
+        ); // 초기 필터 주파수 설정
+        filterNodeRef.current = filterNode; // useRef에 저장
+
+        // microphoneRef.current.connect(filterNode); // 마이크 입력을 필터에 연결
+        sourceNode.connect(filterNode); // 오디오 데이터 필터에 연결
+        filterNode.connect(audioContext.destination); // 필터를 오디오 출력에 연결
       }
 
       // const stream = await navigator.mediaDevices.getUserMedia({ audio: true }); // 마이크 스트림 얻기
       // microphoneRef.current = audioContext.createMediaStreamSource(stream); // 얻은 스트림을 오디오 컨텍스트에 전달
-
-      const filterNode = audioContext.createBiquadFilter(); // BiquadFilterNode 생성
-      filterNode.type = "lowpass"; // 필터 유형 설정 - 저역 필터
-      filterNode.frequency.setValueAtTime(frequency, audioContext.currentTime); // 초기 필터 주파수 설정
-      filterNodeRef.current = filterNode; // useRef에 저장
-
-      // microphoneRef.current.connect(filterNode); // 마이크 입력을 필터에 연결
-      filterNode.connect(audioContext.destination); // 필터를 오디오 출력에 연결
     };
 
     initAudio();
@@ -46,10 +50,11 @@ const AudioProcessor = () => {
         src="/audio/anthem.mp3"
         controls
         onPlay={() => setIsProcessing(true)}
+        onPause={() => setIsProcessing(false)}
       ></audio>
       {/* <button onClick={() => setIsProcessing(true)}>Start</button>
       <button onClick={() => setIsProcessing(false)}>Stop</button> */}
-      {/* <input
+      <input
         type="range"
         min="100"
         max="5000"
@@ -59,7 +64,7 @@ const AudioProcessor = () => {
       />
       <label>
         Frequency: <span>{frequency}</span> Hz
-      </label> */}
+      </label>
     </>
   );
 };
