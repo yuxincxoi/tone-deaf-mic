@@ -33,6 +33,10 @@ const AudioProcessor = () => {
 
         // 왜곡 효과 적용
         const distortedBuffer = applyDistortion(audioBuffer);
+
+        // 왜곡된 오디오 URL 생성
+        const distortedAudioBlob = await audioBufferToBlob(distortedBuffer); // audio buffer를 blob 형식으로 변환
+        setDistortedAudioUrl(URL.createObjectURL(distortedAudioBlob)); // 변환된 Blob을 브라우저에서 재생할 수 있는 URL로 생성하고 상태 업데이트
       } catch (error) {
         console.error(error);
       }
