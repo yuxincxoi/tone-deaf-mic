@@ -107,6 +107,12 @@ const AudioProcessor = () => {
         view.setUint32(offset, value, true);
         offset += 4; // 오프셋을 4바이트 이동
       };
+
+      // 16비트 정수를 DataView에 기록하는 함수
+      const writeUnit16 = (value: number) => {
+        view.setUint16(offset, value, true);
+        offset += 2;
+      };
     };
   };
   return (
