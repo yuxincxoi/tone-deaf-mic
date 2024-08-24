@@ -139,6 +139,13 @@ const AudioProcessor = () => {
       for (let i = 0; i < channels; i++) {
         interleaved.set(buffer.getChannelData(i), i * buffer.length);
       }
+
+      // 16비트 PCM 형식으로 변환할 배열 생성
+      const samples = new Int16Array(interleaved.length);
+      // Float32 데이터를 16비트 PCM 형식으로 변환
+      for (let i = 0; i < interleaved.length; i++) {
+        samples[i] = Math.min(1, Math.max(-1, interleaved[i])) * 0x7fff;
+      }
     };
   };
   return (
