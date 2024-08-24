@@ -113,6 +113,25 @@ const AudioProcessor = () => {
         view.setUint16(offset, value, true);
         offset += 2; // 오프셋을 2바이트 이동
       };
+
+      // RIFF chunk descriptor : 파일 기본 정보
+      writeString("RIFF"); // RIFF : 파일의 시작을 알리는 마커. WAV 파일이 맞는지 확인
+      writeUint32(length - 8); // [파일의 전체 크기 - RIFF 단어와 크기를 나타내는 필드(8바이트)]
+      writeString("WAVE"); // 파일 형식 표시
+
+      // fmt sub-chunk : 오디오 형식 정보
+      writeString("fmt "); // 오디오 데이터의 형식을 설명하는 정보를 시작하는 마커
+      writeUint32(16); // 오디오 형식을 설명하는 데 필요한 데이터의 크기
+      writeUint16(1); // 오디오 포맷이 PCM(일반적인 비압축 오디오 형식)이라는 것을 의미
+      writeUint16(channels); // 오디오가 구성된 채널 개수
+      writeUint32(sampleRate); // 초당 샘플링된 횟수
+      writeUint32((sampleRate * channels * bitsPerSample) / 8); // 초당 바이트 수
+      writeUint16((channels * bitsPerSample) / 8); // 오디오 데이터가 몇 바이트씩 나뉘어 저장되는지
+      writeUint16(bitsPerSample); // 샘플 하나당 몇 비트로 기록되었는지
+
+      // data sub-chunk : 오디오 데이터 정보
+      writeString("data"); // 실제 오디오 데이터가 시작된다는 마커
+      writeUint32(length - offset - 44); // 오디오 데이터의 크기. [전체 파일 길이 - 지금까지 기록된 헤더 부분(44바이트)]
     };
   };
   return (
