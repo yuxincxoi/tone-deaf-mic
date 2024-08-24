@@ -103,15 +103,15 @@ const AudioProcessor = () => {
       };
 
       // 32비트 정수를 DataView에 기록하는 함수
-      const writeUnit32 = (value: number) => {
+      const writeUint32 = (value: number) => {
         view.setUint32(offset, value, true);
         offset += 4; // 오프셋을 4바이트 이동
       };
 
       // 16비트 정수를 DataView에 기록하는 함수
-      const writeUnit16 = (value: number) => {
+      const writeUint16 = (value: number) => {
         view.setUint16(offset, value, true);
-        offset += 2;
+        offset += 2; // 오프셋을 2바이트 이동
       };
     };
   };
