@@ -146,6 +146,14 @@ const AudioProcessor = () => {
       for (let i = 0; i < interleaved.length; i++) {
         samples[i] = Math.min(1, Math.max(-1, interleaved[i])) * 0x7fff;
       }
+
+      // 변환된 16비트 PCM 데이터를 DataView에 기록
+      for (let i = 0; i < samples.length; i++) {
+        view.setInt16(offset, samples[i], true); // 오디오 데이터를 16비트 정수로 DataView에 저장
+        offset += 2;
+      }
+
+      return view.buffer;
     };
   };
   return (
