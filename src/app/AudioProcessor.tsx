@@ -132,6 +132,13 @@ const AudioProcessor = () => {
       // data sub-chunk : 오디오 데이터 정보
       writeString("data"); // 실제 오디오 데이터가 시작된다는 마커
       writeUint32(length - offset - 44); // 오디오 데이터의 크기. [전체 파일 길이 - 지금까지 기록된 헤더 부분(44바이트)]
+
+      // 오디오 데이터 저장할 배열 생성
+      const interleaved = new Float32Array(buffer.length * channels);
+      // 각 채널의 오디오 데이터를 interleaved 배열에 설정
+      for (let i = 0; i < channels; i++) {
+        interleaved.set(buffer.getChannelData(i), i * buffer.length);
+      }
     };
   };
   return (
