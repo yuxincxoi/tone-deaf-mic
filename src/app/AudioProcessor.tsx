@@ -5,6 +5,10 @@ import { useEffect, useRef, useState } from "react";
 const AudioProcessor = () => {
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const [distortedAudioUrl, setDistortedAudioUrl] = useState<string | null>(
+    null
+  );
+  const distortedAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // 오디오 처리 초기화
@@ -164,7 +168,14 @@ const AudioProcessor = () => {
           <source src="/audio/anthem.mp3" type="audio/mpeg" />
         </audio>
       </div>
-      <div></div>
+      <div>
+        <h2>Distorted Audio</h2>
+        <audio
+          ref={distortedAudioRef}
+          controls
+          src={distortedAudioUrl || undefined}
+        ></audio>
+      </div>
     </>
   );
 };
