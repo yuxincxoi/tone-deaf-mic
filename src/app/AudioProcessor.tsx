@@ -175,12 +175,8 @@ const AudioProcessor = () => {
         </audio>
       </div>
       <div>
-        <h2>Distorted Audio</h2>
-        <audio
-          ref={distortedAudioRef}
-          controls
-          src={distortedAudioUrl || undefined}
-        ></audio>
+        <h2>Harmony (3rd Interval)</h2>
+        <audio ref={harmonyAudioRef} controls></audio>
       </div>
     </>
   );
