@@ -30,12 +30,17 @@ const AudioProcessor = () => {
         // ArrayBuffer로 변환된 오디오 데이터를 AudioBuffer로 디코딩
         const audioBuffer = await audioContext?.decodeAudioData(arrayBuffer);
 
-        // 왜곡 효과 적용
-        const distortedBuffer = applyDistortion(audioBuffer);
+        // 3도 화음 추가
+        const harmonyBuffer = await createHarmony(audioBuffer);
 
-        // 왜곡된 오디오 URL 생성
-        const distortedAudioBlob = await audioBufferToBlob(distortedBuffer); // audio buffer를 blob 형식으로 변환
-        setDistortedAudioUrl(URL.createObjectURL(distortedAudioBlob)); // 변환된 Blob을 브라우저에서 재생할 수 있는 URL로 생성하고 상태 업데이트
+        // 생성된 오디오 URL 설정
+        const harmonyBlob = await audioBufferToBlob(harmonyBuffer);
+        setHarmonyAudioUrl(URL.createObjectURL(harmonyBlob));
+
+        // harmonyAudioRef를 통해 3도 화음이 적용된 오디오 재생
+        if (harmonyAudioRef.current) {
+          harmonyAudioRef.current.src = URL.createObjectURL(harmonyBlob);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -44,29 +49,23 @@ const AudioProcessor = () => {
     processAudio();
   }, [audioContext]);
 
-  const applyDistortion = (buffer: AudioBuffer) => {
+  // Jungle 모듈을 사용해 3도 화음 생성
+  const createHarmony = async (buffer: AudioBuffer) => {
     if (!audioContext) return buffer;
 
-    const distortion = audioContext.createWaveShaper(); // 왜곡효과 적용하는 node 생성
-    const gain = audioContext.createGain(); // 볼륨조절 node 생성
-
-    // 왜곡 곡선 생성
-    const curve = new Float32Array(44100);
-    for (let i = 0; i < 44100; i++) {
-      const x = (i * 2) / 44100 - 1;
-      curve[i] = (3 + x * 3) / (3 + Math.abs(x));
-    }
-    distortion.curve = curve; // 왜곡된 곡선을 입력신호에 설정
-    distortion.oversample = "4x"; // 왜곡 품질 향상
-
+    const jungle = new Jungle(audioContext);
     const source = audioContext.createBufferSource(); // 오디오 재생 노드 생성
     source.buffer = buffer;
 
-    // 오디오 노드(재생) -> 왜곡 노드(왜곡) -> 볼륨 노드(볼륨조절) -> 출력 노드
-    source.connect(distortion);
-    distortion.connect(gain);
-    gain.connect(audioContext.destination);
+    // 원본 음성에 3도 위 음을 추가하여 화음 쌓기
+    jungle.setPitchOffset(0.7); // 3도 높이 설정
 
+    source.connect(jungle.input);
+    jungle.output.connect(audioContext.destination);
+
+    source.start();
+
+    console.log("Harmony created.");
     return buffer;
   };
 
@@ -90,6 +89,8 @@ const AudioProcessor = () => {
     const renderBuffer = await offlineContext.startRendering(); // 렌더링된 오디오 데이터 버퍼로 반환
     const wavData = encodeWAV(renderBuffer); // WAV 포맷으로 인코딩
     const audioBlob = new Blob([wavData], { type: "audio/wav" }); // Blob으로 변환하여 반환
+
+    console.log("Blob created:", audioBlob);
     return audioBlob;
   };
 
