@@ -6,10 +6,8 @@ import Jungle from "../../lib/jungle.mjs"; // Jungle 모듈 가져오기
 const AudioProcessor = () => {
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
-  const [distortedAudioUrl, setDistortedAudioUrl] = useState<string | null>(
-    null
-  );
-  const distortedAudioRef = useRef<HTMLAudioElement | null>(null);
+  const [harmonyAudioUrl, setHarmonyAudioUrl] = useState<string | null>(null);
+  const harmonyAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // 오디오 처리 초기화
