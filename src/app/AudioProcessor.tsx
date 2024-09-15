@@ -36,11 +36,6 @@ const AudioProcessor = () => {
         // 생성된 오디오 URL 설정
         const harmonyBlob = await audioBufferToBlob(harmonyBuffer);
         setHarmonyAudioUrl(URL.createObjectURL(harmonyBlob));
-
-        // harmonyAudioRef를 통해 3도 화음이 적용된 오디오 재생
-        if (harmonyAudioRef.current) {
-          harmonyAudioRef.current.src = URL.createObjectURL(harmonyBlob);
-        }
       } catch (error) {
         console.error(error);
       }
