@@ -57,10 +57,6 @@ const AudioProcessor = () => {
 
     source.connect(jungle.input);
     jungle.output.connect(audioContext.destination);
-
-    source.start();
-
-    console.log("Harmony created.");
     return buffer;
   };
 
@@ -84,8 +80,6 @@ const AudioProcessor = () => {
     const renderBuffer = await offlineContext.startRendering(); // 렌더링된 오디오 데이터 버퍼로 반환
     const wavData = encodeWAV(renderBuffer); // WAV 포맷으로 인코딩
     const audioBlob = new Blob([wavData], { type: "audio/wav" }); // Blob으로 변환하여 반환
-
-    console.log("Blob created:", audioBlob);
     return audioBlob;
   };
 
