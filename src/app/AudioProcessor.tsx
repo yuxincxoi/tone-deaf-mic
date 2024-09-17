@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Jungle from "../../lib/jungle.mjs"; // Jungle 모듈 가져오기
+import dynamic from "next/dynamic";
 
 const AudioProcessor = () => {
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
@@ -24,6 +24,7 @@ const AudioProcessor = () => {
 
     const processAudio = async () => {
       try {
+        const { default: Jungle } = await import("../../lib/jungle.mjs");
         const response = await fetch("/audio/anthem.mp3");
         // response를 ArrayBuffer로 변환
         const arrayBuffer = await response.arrayBuffer();
@@ -31,7 +32,7 @@ const AudioProcessor = () => {
         const audioBuffer = await audioContext?.decodeAudioData(arrayBuffer);
 
         // 3도 화음 추가
-        const harmonyBuffer = await createHarmony(audioBuffer);
+        const harmonyBuffer = await createHarmony(audioBuffer, Jungle);
 
         // 생성된 오디오 URL 설정
         const harmonyBlob = await audioBufferToBlob(harmonyBuffer);
@@ -51,7 +52,7 @@ const AudioProcessor = () => {
   }, [audioContext]);
 
   // Jungle 모듈을 사용해 3도 화음 생성
-  const createHarmony = async (buffer: AudioBuffer) => {
+  const createHarmony = async (buffer: AudioBuffer, Jungle: any) => {
     if (!audioContext) return buffer;
 
     const gain = audioContext.createGain(); // 볼륨조절 node 생성
@@ -181,4 +182,4 @@ const AudioProcessor = () => {
   );
 };
 
-export default AudioProcessor;
+export default dynamic(() => Promise.resolve(AudioProcessor), { ssr: false });
