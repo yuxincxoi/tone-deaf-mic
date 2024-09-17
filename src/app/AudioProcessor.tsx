@@ -48,15 +48,18 @@ const AudioProcessor = () => {
   const createHarmony = async (buffer: AudioBuffer) => {
     if (!audioContext) return buffer;
 
+    const gain = audioContext.createGain(); // 볼륨조절 node 생성
+
     const jungle = new Jungle(audioContext);
     const source = audioContext.createBufferSource(); // 오디오 재생 노드 생성
     source.buffer = buffer;
 
     // 원본 음성에 3도 위 음을 추가하여 화음 쌓기
-    jungle.setPitchOffset(0.7); // 3도 높이 설정
+    jungle.setPitchOffset(0.3); // 3도 높이 설정
 
     source.connect(jungle.input);
-    jungle.output.connect(audioContext.destination);
+    jungle.output.connect(gain);
+    gain.connect(audioContext.destination);
     return buffer;
   };
 
