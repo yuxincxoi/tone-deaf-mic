@@ -35,7 +35,13 @@ const AudioProcessor = () => {
 
         // 생성된 오디오 URL 설정
         const harmonyBlob = await audioBufferToBlob(harmonyBuffer);
-        setHarmonyAudioUrl(URL.createObjectURL(harmonyBlob));
+        const harmonyUrl = URL.createObjectURL(harmonyBlob);
+        setHarmonyAudioUrl(harmonyUrl);
+
+        // Harmony 오디오 URL을 <audio> 요소에 적용
+        if (harmonyAudioRef.current) {
+          harmonyAudioRef.current.src = harmonyUrl;
+        }
       } catch (error) {
         console.error(error);
       }
