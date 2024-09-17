@@ -55,22 +55,6 @@ const AudioProcessor = () => {
   const createHarmony = async (buffer: AudioBuffer, Jungle: any) => {
     if (!audioContext) return buffer;
 
-    const gain = audioContext.createGain(); // 볼륨조절 node 생성
-
-    const jungle = new Jungle(audioContext);
-    const source = audioContext.createBufferSource(); // 오디오 재생 노드 생성
-    source.buffer = buffer;
-
-    // 원본 음성에 3도 위 음을 추가하여 화음 쌓기
-    jungle.setPitchOffset(0.3); // 3도 높이 설정
-
-    source.connect(jungle.input);
-    jungle.output.connect(gain);
-    gain.connect(audioContext.destination);
-    return buffer;
-  };
-
-  const audioBufferToBlob = async (buffer: AudioBuffer) => {
     // 오디오 렌더링을 위한 offlineAudioContext 생성
     const offlineContext = new OfflineAudioContext(
       buffer.numberOfChannels,
@@ -81,14 +65,20 @@ const AudioProcessor = () => {
     const source = offlineContext.createBufferSource(); // 오디오 렌더링 노드 생성
     source.buffer = buffer;
 
-    // 오디오 노드(렌더링) -> 출력 노드 연결
-    source.connect(offlineContext.destination);
+    const jungle = new Jungle(offlineContext);
+    jungle.setPitchOffset(0.3);
+
+    source.connect(jungle.input);
+    jungle.output.connect(offlineContext.destination);
 
     // 재생 시작
     source.start();
 
-    const renderBuffer = await offlineContext.startRendering(); // 렌더링된 오디오 데이터 버퍼로 반환
-    const wavData = encodeWAV(renderBuffer); // WAV 포맷으로 인코딩
+    return offlineContext.startRendering();
+  };
+
+  const audioBufferToBlob = async (buffer: AudioBuffer): Promise<Blob> => {
+    const wavData = encodeWAV(buffer); // WAV 포맷으로 인코딩
     const audioBlob = new Blob([wavData], { type: "audio/wav" }); // Blob으로 변환하여 반환
     return audioBlob;
   };
@@ -176,7 +166,9 @@ const AudioProcessor = () => {
       </div>
       <div>
         <h2>Harmony (3rd Interval)</h2>
-        <audio ref={harmonyAudioRef} controls></audio>
+        {harmonyAudioUrl && (
+          <audio ref={harmonyAudioRef} controls src={harmonyAudioUrl}></audio>
+        )}
       </div>
     </>
   );
