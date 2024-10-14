@@ -7,6 +7,7 @@ const AudioProcessor = () => {
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const microphoneRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const jungleRef = useRef<any>(null); // Jungle 오디오 프로세서 참조
+  const [isProcessing, setIsProcessing] = useState(false); // 음치마이크 실행 여부
 
   useEffect(() => {
     // 오디오 처리 초기화
