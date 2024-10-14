@@ -27,6 +27,7 @@ const AudioProcessor = () => {
       try {
         const { default: Jungle } = await import("../../lib/jungle.mjs");
         jungleRef.current = new Jungle(audioContext);
+        jungleRef.current.setPitchOffset(pitchOffset);
 
         if (isProcessing) {
           const stream = await navigator.mediaDevices.getUserMedia({
@@ -81,6 +82,7 @@ const AudioProcessor = () => {
         min="-1"
         max="1"
         step="0.1"
+        value={pitchOffset}
         onChange={handlePitchChange}
         placeholder="PitchChanger"
       />
