@@ -84,6 +84,7 @@ const AudioProcessor = () => {
         onChange={handlePitchChange}
         placeholder="PitchChanger"
       />
+      <p>pitch : {pitchOffset}</p>
     </>
   );
 };
