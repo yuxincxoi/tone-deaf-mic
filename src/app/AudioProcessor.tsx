@@ -74,18 +74,31 @@ const AudioProcessor = () => {
 
   return (
     <>
-      <h2>음치 마이크</h2>
-      <button onClick={handleStartStop}>{isProcessing ? "Off" : "On"}</button>
-      <input
-        type="range"
-        min="-1"
-        max="1"
-        step="0.1"
-        value={pitchOffset}
-        onChange={handlePitchChange}
-        placeholder="PitchChanger"
-      />
-      <p>pitch : {pitchOffset}</p>
+      <div>
+        <button
+          id="onOffBtn"
+          onClick={handleStartStop}
+          className="w-96 m-auto pt-16 text-3xl"
+        >
+          {isProcessing ? "Off" : "On"}
+        </button>
+        <br />
+        <div className="flex justify-between pt-16">
+          <p>down</p>
+          <p>up</p>
+        </div>
+        <input
+          id="pitch"
+          type="range"
+          min="-1"
+          max="1"
+          step="0.1"
+          value={pitchOffset}
+          onChange={handlePitchChange}
+          placeholder="PitchChanger"
+          className="w-96 m-auto"
+        />
+      </div>
     </>
   );
 };
