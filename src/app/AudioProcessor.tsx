@@ -46,6 +46,16 @@ const AudioProcessor = () => {
     };
 
     processAudio();
+
+    // 컴포넌트 언마운트 시 리소스 정리
+    return () => {
+      if (microphoneRef.current) {
+        microphoneRef.current.disconnect(); // 마이크 입력 해제
+      }
+      if (jungleRef.current) {
+        jungleRef.current.output.disconnect(); // Jungle 출력 해제
+      }
+    };
   }, [audioContext, isProcessing]);
 
   const handleStartStop = () => {
