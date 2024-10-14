@@ -72,16 +72,45 @@ const AudioProcessor = () => {
     }
   };
 
+  document.addEventListener("DOMContentLoaded", () => {
+    const switchInput = document.getElementById("switch") as HTMLInputElement;
+    const switchLabel = switchInput.nextElementSibling as HTMLLabelElement;
+    const onfButton = switchLabel.querySelector(".onf_btn") as HTMLElement;
+
+    switchInput.addEventListener("change", () => {
+      if (switchInput.checked) {
+        switchLabel.classList.add("bg-[#c44]", "border-[#c44]");
+        switchLabel.classList.remove("hover:bg-[#efefef]");
+        onfButton.classList.add(
+          "left-[34px]",
+          "bg-white",
+          "shadow-[1px_2px_3px_rgba(0,0,0,0.12)]"
+        );
+      } else {
+        switchLabel.classList.remove("bg-[#c44]", "border-[#c44]");
+        switchLabel.classList.add("hover:bg-[#efefef]");
+        onfButton.classList.remove(
+          "left-[34px]",
+          "bg-white",
+          "shadow-[1px_2px_3px_rgba(0,0,0,0.12)]"
+        );
+      }
+    });
+  });
+
   return (
     <>
       <div>
-        <button
-          id="onOffBtn"
-          onClick={handleStartStop}
-          className="w-96 m-auto pt-16 text-3xl"
-        >
-          {isProcessing ? "Off" : "On"}
-        </button>
+        <label className="relative inline-flex items-center cursor-pointer mt-16">
+          <input
+            type="checkbox"
+            checked={isProcessing} // 체크박스 상태와 isProcessing 동기화
+            onChange={handleStartStop} // 상태 변경 시 핸들러 호출
+            placeholder="onOff"
+            className="sr-only peer"
+          />
+          <div className="w-14 h-8 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:absolute after:top-[3.5px] after:left-[3.5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-lime-500 hover:peer-checked:bg-lime-600 mx-auto"></div>
+        </label>
         <br />
         <div className="flex justify-between pt-16">
           <p>down</p>
