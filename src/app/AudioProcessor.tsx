@@ -25,7 +25,6 @@ const AudioProcessor = () => {
     const processAudio = async () => {
       try {
         const { default: Jungle } = await import("../../lib/jungle.mjs");
-        const response = await fetch("/audio/anthem.mp3");
       } catch (error) {
         console.error(error);
       }
@@ -62,18 +61,10 @@ const AudioProcessor = () => {
 
   return (
     <>
-      <div>
-        <h2>Original</h2>
-        <audio ref={audioElementRef} controls>
-          <source src="/audio/anthem.mp3" type="audio/mpeg" />
-        </audio>
-      </div>
-      <div>
-        <h2>Harmony (3rd Interval)</h2>
-        {harmonyAudioUrl && (
-          <audio ref={harmonyAudioRef} controls src={harmonyAudioUrl}></audio>
-        )}
-      </div>
+      <h2>음치 마이크</h2>
+      {harmonyAudioUrl && (
+        <audio ref={harmonyAudioRef} controls src={harmonyAudioUrl}></audio>
+      )}
     </>
   );
 };
