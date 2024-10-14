@@ -57,7 +57,7 @@ const AudioProcessor = () => {
         jungleRef.current.output.disconnect(); // Jungle 출력 해제
       }
     };
-  }, [audioContext, isProcessing]);
+  }, [audioContext, isProcessing, pitchOffset]);
 
   const handleStartStop = () => {
     setIsProcessing(!isProcessing);
