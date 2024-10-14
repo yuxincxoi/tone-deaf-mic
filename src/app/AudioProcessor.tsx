@@ -32,7 +32,7 @@ const AudioProcessor = () => {
     };
 
     processAudio();
-  }, [audioContext]);
+  }, [audioContext, isProcessing]);
 
   const handleStartStop = () => {
     setIsProcessing(!isProcessing);
