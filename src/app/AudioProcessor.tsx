@@ -26,6 +26,20 @@ const AudioProcessor = () => {
       try {
         const { default: Jungle } = await import("../../lib/jungle.mjs");
         jungleRef.current = new Jungle(audioContext);
+
+        if (isProcessing) {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          }); // 마이크 스트림 얻기
+          microphoneRef.current = audioContext.createMediaStreamSource(stream); // 얻은 마이크 스트림 입력 소스를 AudioContext에 전달
+          microphoneRef.current.connect(jungleRef.current.input); // Jungle 오디오 프로세서에 연결
+          jungleRef.current.output.connect(audioContext.destination); // 처리된 오디오를 스피커로 출력
+        } else {
+          if (microphoneRef.current) {
+            microphoneRef.current.disconnect();
+            jungleRef.current.output.disconnect();
+          }
+        }
       } catch (error) {
         console.error(error);
       }
