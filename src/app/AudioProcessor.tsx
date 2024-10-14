@@ -34,9 +34,14 @@ const AudioProcessor = () => {
     processAudio();
   }, [audioContext]);
 
+  const handleStartStop = () => {
+    setIsProcessing(!isProcessing);
+  };
+
   return (
     <>
       <h2>음치 마이크</h2>
+      <button onClick={handleStartStop}>{isProcessing ? "Off" : "On"}</button>
     </>
   );
 };
