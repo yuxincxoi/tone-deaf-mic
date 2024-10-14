@@ -62,6 +62,8 @@ const AudioProcessor = () => {
     setIsProcessing(!isProcessing);
   };
 
+  const handlePitchChange = () => {};
+
   return (
     <>
       <h2>음치 마이크</h2>
@@ -71,6 +73,7 @@ const AudioProcessor = () => {
         min="-1"
         max="1"
         step="0.1"
+        onChange={handlePitchChange}
         placeholder="PitchChanger"
       />
     </>
