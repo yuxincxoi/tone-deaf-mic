@@ -101,7 +101,7 @@ const AudioProcessor = () => {
   return (
     <>
       <div>
-        <label className="relative inline-flex items-center cursor-pointer mt-16">
+        <label className="relative inline-flex items-center cursor-pointer mt-16 mx-auto w-96">
           <input
             type="checkbox"
             checked={isProcessing} // 체크박스 상태와 isProcessing 동기화
@@ -109,7 +109,7 @@ const AudioProcessor = () => {
             placeholder="onOff"
             className="sr-only peer"
           />
-          <div className="w-14 h-8 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:absolute after:top-[3.5px] after:left-[3.5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-lime-500 hover:peer-checked:bg-lime-600 mx-auto"></div>
+          <div className="w-14 h-8 bg-gray-200 hover:bg-gray-300 peer-focus:outline-0 peer-focus:ring-transparent rounded-full peer transition-all ease-in-out duration-500 peer-checked:after:translate-x-full peer-checked:after:border-white after:absolute after:top-[3.5px] after:left-[167.5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-black hover:peer-checked:bg-stone-700 mx-auto"></div>
         </label>
         <br />
         <div className="flex justify-between pt-16">
@@ -125,7 +125,7 @@ const AudioProcessor = () => {
           value={pitchOffset}
           onChange={handlePitchChange}
           placeholder="PitchChanger"
-          className="w-96 m-auto"
+          className="z-10 mb-1 mt-4 h-2 w-full appearance-none bg-neutral-100 focus:outline-black dark:bg-neutral-900 dark:focus:outline-white [&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:bg-black active:[&::-moz-range-thumb]:scale-110 [&::-moz-range-thumb]:dark:bg-white [&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:border-none [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:active:scale-110 [&::-webkit-slider-thumb]:dark:bg-white [&::-moz-range-thumb]:rounded-full [&::-webkit-slider-thumb]:rounded-full rounded-full"
         />
       </div>
     </>
