@@ -66,6 +66,13 @@ const AudioProcessor = () => {
     <>
       <h2>음치 마이크</h2>
       <button onClick={handleStartStop}>{isProcessing ? "Off" : "On"}</button>
+      <input
+        type="range"
+        min="-1"
+        max="1"
+        step="0.1"
+        placeholder="PitchChanger"
+      />
     </>
   );
 };
