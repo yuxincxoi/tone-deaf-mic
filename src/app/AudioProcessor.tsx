@@ -66,6 +66,10 @@ const AudioProcessor = () => {
   const handlePitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPitchOffset = parseFloat(e.target.value); // 입력받은 피치 값을 숫자로 변환
     setPitchOffset(newPitchOffset);
+
+    if (jungleRef.current) {
+      jungleRef.current.setPitchOffset(newPitchOffset); // Jungle 인스턴스의 피치 오프셋 업데이트
+    }
   };
 
   return (
