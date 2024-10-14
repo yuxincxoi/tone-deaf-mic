@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 const AudioProcessor = () => {
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const microphoneRef = useRef<MediaStreamAudioSourceNode | null>(null);
+  const jungleRef = useRef<any>(null); // Jungle 오디오 프로세서 참조
 
   useEffect(() => {
     // 오디오 처리 초기화
