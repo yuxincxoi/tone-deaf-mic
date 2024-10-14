@@ -24,6 +24,7 @@ const AudioProcessor = () => {
     const processAudio = async () => {
       try {
         const { default: Jungle } = await import("../../lib/jungle.mjs");
+        jungleRef.current = new Jungle(audioContext);
       } catch (error) {
         console.error(error);
       }
