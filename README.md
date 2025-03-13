@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎵 Tone-deaf Mic
 
-## Getting Started
+**Tone-deaf Mic**는 음성 변조 기능을 활용한 마이크입니다. 친구들과의 노래방 게임에 활용해 보세요! 이 마이크로 노래를 하면 누구든 음치가 될 수 있습니다!
 
-First, run the development server:
+## ✨ 주요 기능
+
+- 🔌 **전원 on/off 기능**: 마이크의 전원을 켜고 끌 수 있는 기능을 제공합니다.
+- 🎤 **음성 변조 기능**: 사용자의 목소리를 변조하여 재미있는 음성을 생성할 수 있습니다.
+- 🎶 **피치 조절 기능**: 목소리의 피치를 조절하여 다양한 음성 효과를 제공합니다.
+
+## 🛠 기술 스택
+
+- **Frontend**: Next.js, TypeScript, Tailwind CSS
+- **Audio Processing**: Jungle JS
+- **Version Control**: Git, GitHub
+
+## 🚀 설치 및 실행
 
 ```bash
+git clone https://github.com/yuxincxoi/tone-deaf-mic.git
+cd audio-recorder
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎛 사용법
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. 마이크의 전원을 켭니다.
+2. 피치를 조절하여 음성변조 효과를 설정합니다.
+3. 랜덤으로 섞인 마이크 속에 음치 마이크를 넣어 친구들과 함께 노래를 시작합니다.
